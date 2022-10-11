@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Two, Three, Five</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital@1&display=swap" rel="stylesheet">
+
+    <style>
+        * {margin: 0;padding: 0;}
+
+        body {background-image: url("images/background.jpg");background-size: 100%;background-attachment: fixed;color: white;}
+
+        header {text-align: center;background-color: rgb(32 32 103 / 40%);padding: 10px 0px;font-family: 'Lobster Two', cursive;}
+
+        button {position: absolute; top: 10px; right: 20px; padding: 5px 10px; border-radius: 14px; border: 4px solid yellowgreen;
+            color: white; font-size: 15px; background-color: rgb(32 32 103 / 40%);}
+
+        .container {width: 700px;margin: auto;margin-top: 80px; padding: 10px; text-align: justify; border-radius: 5px;
+            background-color: rgba(151, 189, 222, 0.4);}
+        
+        .container>p{background-color: rgba(151, 189, 222, 0.4);}
+
+        .link{width: 100%;margin: auto; margin-top: 10px; background-color: rgba(151, 189, 222, 0.4); text-align: center;
+            font-size: large;}
+
+        .link a{padding: 5px 15px; margin: 5px 0px;}
+
+        select{width: 100%; padding: 5px 15px;}
+
+        .color-items{display: none;}
+
+        .color{width:30px; height:30px; margin: 5px 5px}
+
+        .red{background-color:red ;}
+
+        .green{background-color:green ;}
+
+        .black{background-color:black ;}
+
+        .yellow{background-color:yellow ;}
+
+        form{display: none;}
+
+        input{width: 95.2%;padding: 5px 15px;margin: 8px 0 0 0;}
+
+        input[type=button]{width: 100%; padding: 5px 15px;margin: 8px 0 0 0; background: rgba(176, 223, 105, 0.731);}
+    </style>
+
+    <script>
+        $(function () {
+
+            //Task 1
+            $('#items').change(function(){
+                var item = $('#items').val();
+                if(item === "color"){
+                    $('.color-items').show();
+                }
+                else if(item === "size"){
+                    $("#size").show();
+                    $("#size").css("marginTop","5px");
+                }
+                else if(item === "customer-form"){
+                    $('form').show();
+                }
+            });
+
+            $('#fmbtn').click(function(){
+                var fname = $('#fname').val();
+                var lname = $('#lname').val();
+                var fullname = fname + ' ' + lname;
+                $('#fullname').show().append("Fullname :" + fullname + " ! ");
+            });
+
+            //Task 2
+            $("button").click(function () {
+                $('H1').text("HELLO, GOOD TO SEE YOU!")
+                $('button').text('Header Style Changed');
+                $("header").css({
+                    "color": "yellow",
+                    "fontSize": "30px",
+                    "fontFamily": "Lobster Two', cursive",
+                    "backgroundColor": "#922b2b66"
+                });
+            });
+            
+            //Task 3
+            $('p').mouseenter(function () {
+                var pText = $(this).text()
+                $('p').empty();
+                $('p').append('<img src="images/back.jpg" height="100%" width="100%">');
+                $("p").mouseleave(function(){
+                    $('p').text(pText);
+                    alert('Outside From Paragraph');
+                });
+            });
+
+            //Task 4
+            $('#fmbtn').click(function(){
+                var result = $('#fullname');
+                var start_num = $('#start').val();
+                var end_num = $('#end').val();
+                if(start_num >= 0){
+                    if(end_num > start_num){
+                        if(end_num >50){
+                            for(i = start_num;i<=50;i++){
+                                result.append(i);
+                                if(i != 50){    
+                                    result.append(',');
+                                }
+                            }
+                        }
+                        else{
+                            for(j=start_num; j<=end_num; j++){
+                                if(j%2 == 0){
+                                    result.append(j);
+                                    if(j != end_num){    
+                                        result.append(',');
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else{
+                        alert('Intial Value can\'t be smaller than End value!!')
+                    }
+                }
+                else{
+                    alert('Only Integer Value will be Valid!!')
+                }
+            });
+            
+            // Task 5 
+            var spanText = $('a span').text();
+            $("a").click(function(){
+                $('a').css({'textDecoration': 'none',
+                            'color': 'Yellow',
+                            'backgroundColor': 'blue'
+                });
+                console.log(spanText + ': ' + $(this).attr("href"));
+            });
+
+        });
+    </script>
+</head>
+
+<body>
+    <header>
+        <h1><span>WELCOME TO THE WEBSITE</span></h1>
+    </header>
+    <button> Style Header Text </button>
+
+    <div class="container">
+        <select name="items" id="items">
+            <option value="choose">Choose</option>
+            <option value="color">Color</option>
+            <option value="size">Size</option>
+            <option value="customer-form">Customer Form</option>
+        </select>
+        
+        <select name="size" id="size" hidden>
+            <option value="choose">Choose Size</option>
+            <option value="l">L Size</option>
+            <option value="m">M Size</option>
+            <option value="s">S Size</option>
+        </select>
+        <div class="color-items">
+            <div class="red color"></div>
+            <div class="yellow color"></div>
+            <div class="black color"></div>
+            <div class="green color"></div>
+        </div>
+        <form>
+            <fieldset>
+                <legend>Customer Form</legend>
+                <input type="text" id="fname" name="fname" placeholder="Enter the First Name" required>
+                <input type="text" id="lname" name="lname" placeholder="Enter the Last Name" required>
+                <input type="number" name="start" id="start" min="0" max="100" placeholder="Enter any integer">
+                <input type="number" name="end" id="end" min="0" max="100" placeholder="Enter the End integer">
+                <input type="button" value="Submit" id="fmbtn">
+            </fieldset> 
+          </form>
+
+          <div id="fullname" hidden></div>
+    </div>
+    <div class="container">
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laborum non provident facilis quo quia sunt
+            doloribus et quae illum! Repellendus eos quod soluta quaerat nihil. Quod possimus fugit dolorum voluptate
+            dignissimos excepturi exercitationem incidunt nihil placeat facere et autem delectus velit, illum quaerat
+            veritatis minima porro sed eum? Saepe quo ab magni tempore, temporibus ducimus nesciunt odit enim illo,
+            recusandae doloribus dolorum vel minima expedita repellendus omnis rem quia corrupti aliquam eligendi
+            accusamus nulla incidunt labore blanditiis.
+        </p>
+        <div class="link">
+            <a href="www.youtube.com" target="_blank"><span>YouTube</span></a>
+        </div>
+    </div>
+</body>
+</html>
